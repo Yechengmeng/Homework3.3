@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Delay_us.h"
+#include "Stepper_motor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,16 +103,8 @@ HAL_GPIO_WritePin(ENA_GPIO_Port, ENA_Pin, GPIO_PIN_RESET);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    if(Direction==0){
-      HAL_GPIO_WritePin(DIR_GPIO_Port, DIR_Pin, GPIO_PIN_RESET);
-    }
-    else{
-      HAL_GPIO_WritePin(DIR_GPIO_Port, DIR_Pin, GPIO_PIN_SET);
-    }
-    HAL_GPIO_WritePin(PUL_GPIO_Port, PUL_Pin, GPIO_PIN_SET);
-    Delay_us(500);
-    HAL_GPIO_WritePin(PUL_GPIO_Port,PUL_Pin,GPIO_PIN_RESET);
-    Delay_us(500);
+    stepper_motor_setDirection(Direction);
+    stepper_motor_generatePulse(500);
   }
   /* USER CODE END 3 */
 }
